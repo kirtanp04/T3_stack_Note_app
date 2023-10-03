@@ -7,6 +7,7 @@ import { api, type RouterOutputs } from "../utils/api";
 import { Header } from "../components/Header";
 import { NoteEditor } from "../components/NoteEditor";
 import { NoteCard } from "../components/NoteCard";
+import { date } from "zod";
 
 const Home: NextPage = () => {
   return (
@@ -92,13 +93,18 @@ const Content: React.FC = () => {
         <input
           type="text"
           placeholder="New Topic"
-          className="input-bordered input input-sm w-full"
+          className="input input-bordered input-sm w-full"
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              createTopic.mutate({
-                title: e.currentTarget.value,
-              });
-              e.currentTarget.value = "";
+              if (sessionData === null) {
+                alert("Please Login");
+                e.currentTarget.value = "";
+              } else {
+                createTopic.mutate({
+                  title: e.currentTarget.value,
+                });
+                e.currentTarget.value = "";
+              }
             }
           }}
         />

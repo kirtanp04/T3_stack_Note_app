@@ -26,7 +26,7 @@ export const Header = () => {
           ) : (
             <button
               className="btn-ghost rounded-btn btn"
-              onClick={() => void signIn()}
+              onClick={() => void signIn("google")}
             >
               Sign in
             </button>
